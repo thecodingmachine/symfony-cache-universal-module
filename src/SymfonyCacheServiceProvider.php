@@ -76,7 +76,10 @@ class SymfonyCacheServiceProvider extends ServiceProvider
      */
     public static function createChainCache(ContainerInterface $container): ChainCache
     {
-        return new ChainCache(\iterator_to_array($container->get('symfony.cache.chained.caches')), $container->get('symfony.cache.defaultLifetime'));
+        return new ChainCache(
+            \iterator_to_array($container->get('symfony.cache.chained.caches')),
+            $container->get('symfony.cache.defaultLifetime')
+        );
     }
 
     /**
@@ -84,7 +87,8 @@ class SymfonyCacheServiceProvider extends ServiceProvider
      */
     public static function createArrayCache(ContainerInterface $container): ArrayCache
     {
-        // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
+        // Note: the array cache does not store the data serialized
+        // by default (because we uses it for high performance).
         return new ArrayCache($container->get('symfony.cache.defaultLifetime'), false);
     }
 
@@ -93,7 +97,6 @@ class SymfonyCacheServiceProvider extends ServiceProvider
      */
     public static function createNullCache(): NullCache
     {
-        // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
         return new NullCache();
     }
 
@@ -102,7 +105,6 @@ class SymfonyCacheServiceProvider extends ServiceProvider
      */
     public static function createApcuCache(ContainerInterface $container): ApcuCache
     {
-        // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
         return new ApcuCache(
             $container->get('symfony.cache.namespace'),
             $container->get('symfony.cache.defaultLifetime'),
@@ -115,7 +117,6 @@ class SymfonyCacheServiceProvider extends ServiceProvider
      */
     public static function createPhpFilesCache(ContainerInterface $container): PhpFilesCache
     {
-        // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
         return new PhpFilesCache(
             $container->get('symfony.cache.namespace'),
             $container->get('symfony.cache.defaultLifetime'),
