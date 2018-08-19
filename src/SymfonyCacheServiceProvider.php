@@ -103,9 +103,11 @@ class SymfonyCacheServiceProvider extends ServiceProvider
     public static function createApcuCache(ContainerInterface $container): ApcuCache
     {
         // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
-        return new ApcuCache($container->get('symfony.cache.namespace'),
+        return new ApcuCache(
+            $container->get('symfony.cache.namespace'),
             $container->get('symfony.cache.defaultLifetime'),
-            $container->get('symfony.cache.version'));
+            $container->get('symfony.cache.version')
+        );
     }
 
     /**
@@ -114,10 +116,11 @@ class SymfonyCacheServiceProvider extends ServiceProvider
     public static function createPhpFilesCache(ContainerInterface $container): PhpFilesCache
     {
         // Note: the array cache does not store the data serialized by default (because we uses it for high performance).
-        return new PhpFilesCache($container->get('symfony.cache.namespace'),
+        return new PhpFilesCache(
+            $container->get('symfony.cache.namespace'),
             $container->get('symfony.cache.defaultLifetime'),
             $container->get('symfony.cache.files.directory')
-            );
+        );
     }
 
     /**
@@ -127,6 +130,4 @@ class SymfonyCacheServiceProvider extends ServiceProvider
     {
         return new SimpleCacheAdapter($container->get(CacheInterface::class));
     }
-
-
 }

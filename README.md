@@ -73,6 +73,7 @@ This *service provider* provides the following services:
 | `NullCache::class`          | A cache that caches nothing |
 | `ApcuCache::class`          | A cache with an APCu backend |
 | `PhpFilesCache::class`      | A cache with PHP files as backend |
-
+| `CacheItemPoolInterface::class`     | Alias to `SimpleCacheAdapter::class` |
+| `SimpleCacheAdapter::class`     | A PSR-6 => PSR-16 adapter. |
 
 <small>Project template courtesy of <a href="https://github.com/thecodingmachine/service-provider-template">thecodingmachine/service-provider-template</a></small>
