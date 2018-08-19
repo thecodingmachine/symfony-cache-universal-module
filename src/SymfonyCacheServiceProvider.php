@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace TheCodingMachine;
 
-use Psr\SimpleCache\CacheInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Container\ContainerInterface;
+use Psr\SimpleCache\CacheInterface;
+use Symfony\Component\Cache\Adapter\SimpleCacheAdapter;
 use Symfony\Component\Cache\Simple\ApcuCache;
 use Symfony\Component\Cache\Simple\ArrayCache;
 use Symfony\Component\Cache\Simple\ChainCache;
@@ -117,4 +119,14 @@ class SymfonyCacheServiceProvider extends ServiceProvider
             $container->get('symfony.cache.files.directory')
             );
     }
+
+    /**
+     * @Factory(aliases={CacheItemPoolInterface::class})
+     */
+    public static function createChainAdapter(ContainerInterface $container): SimpleCacheAdapter
+    {
+        return new SimpleCacheAdapter($container->get(CacheInterface::class));
+    }
+
+
 }

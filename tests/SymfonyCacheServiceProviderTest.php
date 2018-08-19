@@ -3,6 +3,7 @@
 namespace TheCodingMachine;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
 use Simplex\Container;
 use Symfony\Component\Cache\Simple\ChainCache;
@@ -24,5 +25,7 @@ class SymfonyCacheServiceProviderTest extends TestCase
         $filesCache = $container->get(PhpFilesCache::class);
         $this->assertInstanceOf(PhpFilesCache::class, $filesCache);
 
+        $psr6Cache = $container->get(CacheItemPoolInterface::class);
+        $this->assertInstanceOf(CacheItemPoolInterface::class, $psr6Cache);
     }
 }
